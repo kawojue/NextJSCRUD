@@ -1,4 +1,6 @@
+import { Suspense } from "react"
 import getUser from "@/lib/getUser"
+import Spinner from "@/components/Spinner"
 import getUserPosts from "@/lib/getUserPosts"
 import UserPosts from '@/app/users/[userId]/posts/page'
 
@@ -14,12 +16,10 @@ const page = async ({ params: { userId } }: User) => {
 
     return (
         <section>
-            {JSON.stringify(user)}
-            <h3>{await user.name}</h3>
-            <p>@{user.username}</p>
-            <h4>{user.email}</h4>
-            <p>{user.address.street}</p>
-            <UserPosts posts={userPosts} />
+            <h3>{user.name}</h3>
+            <Suspense fallback={<Spinner/>}>
+                <UserPosts posts={userPosts} />
+            </Suspense>
         </section>
     )
 }
