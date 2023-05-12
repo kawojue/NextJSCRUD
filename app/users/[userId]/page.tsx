@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import getUser from "@/lib/getUser"
 import Spinner from "@/components/Spinner"
@@ -7,6 +8,14 @@ import UserPosts from "@/components/UserPosts"
 interface User {
     params: {
         userId: string
+    }
+}
+
+export async function generateMetadata ({ params: { userId } }: User): Promise<Metadata> {
+    const user = await getUser(userId)
+    return {
+        title: user.name,
+        description: `Page of ${user.name}`
     }
 }
 
