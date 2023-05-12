@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import getUser from "@/lib/getUser"
 import Spinner from "@/components/Spinner"
 import getUserPosts from "@/lib/getUserPosts"
-import UserPosts from '@/app/users/[userId]/posts/page'
+import UserPosts from "@/components/UserPosts"
 
 interface User {
     params: {
@@ -12,13 +12,14 @@ interface User {
 
 const page = async ({ params: { userId } }: User) => {
     const user = await getUser(userId)
-    const userPosts = await getUserPosts(userId)
+    const userPosts: Promise<any> =  getUserPosts(userId)
 
     return (
         <section>
             <h3>{user.name}</h3>
             <Suspense fallback={<Spinner/>}>
-                <UserPosts posts={userPosts} />
+                {/* @ts-expect-error */}
+                <UserPosts promise={userPosts} />
             </Suspense>
         </section>
     )
