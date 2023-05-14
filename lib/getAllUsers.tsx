@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getAllUsers = async () => {
+const getAllUsers = async (): Promise<any> => {
     let data: any
     await axios.get('https://jsonplaceholder.typicode.com/users')
     .then((res: any) => {
