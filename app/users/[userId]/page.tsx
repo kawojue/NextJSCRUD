@@ -1,7 +1,8 @@
-import type { Metadata } from "next"
 import { Suspense } from "react"
 import getUser from "@/lib/getUser"
+import type { Metadata } from "next"
 import Spinner from "@/components/Spinner"
+import getAllUsers from "@/lib/getAllUsers"
 import getUserPosts from "@/lib/getUserPosts"
 import UserPosts from "@/components/UserPosts"
 
@@ -32,6 +33,15 @@ const page = async ({ params: { userId } }: User) => {
             </Suspense>
         </section>
     )
+}
+
+export async function generateStaticParams () {
+    const users = await getAllUsers()
+    return users.map((user: any) => (
+        {
+            userId: user.id.toString()
+        }
+    ))
 }
 
 export default page
