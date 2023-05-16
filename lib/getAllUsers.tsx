@@ -7,8 +7,9 @@ const getAllUsers = async () => {
         data = res.data
     })
     .catch((err: any) => {
-        throw new Error("Failed to fetch users!")
+        data = undefined
     })
+
     return data
 }
 
