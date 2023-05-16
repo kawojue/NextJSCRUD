@@ -7,7 +7,7 @@ const getUser = async (userId: string) => {
         data = res.data
     })
     .catch((err: any) => {
-        throw new Error ("User does not exist.")
+        data = undefined
     })
 
     return data
