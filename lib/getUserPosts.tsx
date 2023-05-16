@@ -7,7 +7,7 @@ const getUserPosts = async (id: string) => {
         data = res.data
     })
     .catch((err: any) => {
-        throw new Error("Failed to fetch User's Posts!")
+        data = undefined
     })
 
     return data
